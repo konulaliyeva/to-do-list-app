@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.img-container {
+  background: url("../images/bg-desktop-light.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 300px;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 20px;
+  position: absolute;
+  top: 50px;
+  left: 500px;
+}
+
+.list-heading {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-heading h1 {
+  font-size: 40px;
+  text-transform: uppercase;
+  letter-spacing: 15px;
+  color: #ffffff;
+}
+
+.list-heading .fa-solid {
+  color: #ffffff;
+  font-size: 30px;
+}
+
+/* FORM */
+.list-form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  background-color: white;
+  width: 540px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 50px;
+}
+
+.form-input {
+  /* background-color: white;
+  height: 40px; */
+  border: none;
+  outline: none;
+  margin-left: 10px;
+  width: 500px;
+  padding: 10px 0;
+}
+::placeholder {
+  font-family: "Josefin Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 18px;
+  color: #494c6b;
+  letter-spacing: -0.25px;
+}
+.form-input {
+  font-family: "Josefin Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 18px;
+  color: #494c6b;
+  letter-spacing: -0.25px;
+}
+/* .form-radio-button:checked ~ .form-input {
+  text-decoration: line-through;
+} */
+
+.input-item-class {
+  width: 100% !important;
+}
+
+.input-item-class {
+  border-radius: 5px;
+  width: 540px;
+  padding: 20px;
+  border: none;
+  background-color: rgba(255, 255, 255);
+  margin-top: 30px;
+  margin-bottom: 24px;
+}
+
+.list-content {
+  background-color: rgba(255, 255, 255);
+  width: 540px;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+#all-list-items {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+}
+.list-items {
+  display: flex;
+  padding-bottom: 15px;
+  font-family: "Josefin Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 18px;
+  color: #494c6b;
+  letter-spacing: -0.25px;
+}
+
+.list-label {
+  margin-left: 10px;
+  position: relative;
+  top: 3px;
+}
+.list-radio-btn:checked ~ .list-label .span-label {
+  text-decoration: line-through;
+}
+
+/* input[type="radio"] {
+  height: 1.7em;
+  width: 1.7em;
+  accent-color: #8b0ffe;
+} */
+
+.footer-list {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px;
+}
+
+.list-filter {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  width: 200px;
+}
+.list-filter li a {
+  text-decoration: none;
+}
+.clear-completed a {
+  text-decoration: none;
+}
+/*  */
+
+.list-input-class:checked {
+  text-decoration: line-through;
+}
