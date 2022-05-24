@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -20,17 +20,19 @@
     />
   </head>
   <body>
-    <section>
-      <div class="img-container"></div>
+    <section id="section">
+      <div id="img" class="img-container"></div>
 
       <div class="list-container">
         <div class="list-heading">
           <h1>to do</h1>
-          <i class="fa-solid fa-moon"></i>
+          <button id="iconBtn">
+            <i id="iconMoon" class="fa-solid fa-moon"></i>
+          </button>
         </div>
 
         <form class="list-form" action="" type="submit" id="form">
-          <input type="radio" id="list-radio" class="form-radio-button" />
+          <input type="checkbox" id="checkbox" class="form-radio-button" />
           <input
             type="text"
             id="list-input"
@@ -40,7 +42,7 @@
         </form>
 
         <div class="list-content">
-          <div class="label-container" id="all-list-items">
+          <div class="label-container" id="list-form">
             <!-- <div>
               <label for="added-item"></label>
               <input type="radio" id="added-item" class="added-items" />
@@ -48,7 +50,7 @@
             <i class="fa-solid fa-xmark"></i> -->
           </div>
           <div class="footer-list">
-            <div class="left-items"><p>${} items left</p></div>
+            <div class="left-items"><p id="count-uncompleted-items"></p></div>
             <div class="center-items">
               <ul class="list-filter">
                 <li><a href="#">All</a></li>
