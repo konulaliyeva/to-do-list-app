@@ -60,19 +60,21 @@ let countUncompleted = document.getElementById("count-uncompleted-items");
 const toDoList = [];
 
 form.addEventListener("submit", handleFormSubmit);
-listItems.addEventListener("click", handleListClick);
+// listItems.addEventListener("click", handleListClick);
 
 function handleFormSubmit(event) {
   event.preventDefault();
   const todoItem = {
     text: input.value,
     isCompleted: inputCheckbox.checked,
+    id: Date.now(),
   };
+
   if (input.value !== "") {
     toDoList.push(todoItem);
     input.value = "";
     inputCheckbox.checked = false;
-    displayList();
+    displayList(todoItem);
     displayItemCount();
   }
 
@@ -84,10 +86,11 @@ function displayItemCount() {
     (item) => item.isCompleted === false
   );
   countUncompleted.textContent = uncompletedItems.length + " items lefts";
-  uncompletedItems.style.color = "#000";
+
+  console.log("uncompletedItems", uncompletedItems);
 }
 
-function displayList() {
+function displayList(todoItem) {
   listItems.innerHTML = "";
   toDoList.forEach(function (item) {
     let listRadioBtn = document.createElement("input");
@@ -116,6 +119,20 @@ function displayList() {
     allListElements.append(listContainer);
     allListElements.appendChild(deleteBtn);
     listItems.appendChild(allListElements); //listItems-list form olandi
+
+    // checked olunan item count hesablma hissesi
+    allListElements.setAttribute("data-key", todoItem.id);
+
+    listRadioBtn.addEventListener("click", (event) => {
+      const key = event.target.parentElement.parentElement.dataset.key;
+      const item = toDoList.find((item) => item.id === Number(key));
+
+      item.isCompleted = !item.isCompleted;
+    });
+
+    listRadioBtn.addEventListener("change", () => {
+      displayItemCount();
+    });
   });
 }
 let iconBtn = document.getElementById("iconBtn");
@@ -145,41 +162,3 @@ iconBtn.onclick = function () {
     document.getElementById("iconMoon").classList.add("fa-moon");
   }
 };
-
-// <button class="delete-button">x</button>
-// <input type="checkbox" />
-// deleteBtn.onclick = function(){
-
-// }
-// console.log("delet");
-// if (event.target.matches(".delete-btn")) {
-//   // TODO: delete todo
-//   console.log("event", event);
-//   toDoList.splice(toDoList[0], 1);
-// } else if (event.target.matches('input[type="checkbox"]')) {
-//   // TODO: set completed true
-//   toDoList.update();
-// }
-// displayList();
-
-// background: url("../images/bg-desktop-light.jpg");
-// background-repeat: no-repeat;
-// background-size: cover;
-// width: 100%;
-// height: 300px;
-
-function handleListClick(event) {
-  // <button class="delete-button">x</button>
-  // <input type="checkbox" />
-  console.log("event", event);
-
-  if (event.target.matches(".delete-btn")) {
-    // TODO: delete todo
-    console.log("if ", event);
-    toDoList.splice(filanIndex, 1);
-  } else if (event.target.matches('input[type="checkbox"]')) {
-    // TODO: set completed true
-    toDoList.update(filaIndex);
-  }
-  displayList();
-}
