@@ -59,6 +59,20 @@ let countUncompleted = document.getElementById("count-uncompleted-items");
 
 const toDoList = [];
 
+listItems.addEventListener("click", (event) => {
+  if (event.target.matches('input[type="checkbox"]')) {
+    const key = event.target.parentElement.parentElement.dataset.key;
+    toDoList.forEach((todoItem) => {
+      if (todoItem.id == key) {
+        console.log(todoItem, key);
+        console.log(document.querySelector(`[data-key="${key}"]`));
+        todoItem.isCompleted = event.target.checked;
+      }
+    });
+    displayItemCount();
+  }
+});
+
 form.addEventListener("submit", handleFormSubmit);
 // listItems.addEventListener("click", handleListClick);
 
@@ -74,7 +88,7 @@ function handleFormSubmit(event) {
     toDoList.push(todoItem);
     input.value = "";
     inputCheckbox.checked = false;
-    displayList(todoItem);
+    displayList();
     displayItemCount();
   }
 
@@ -90,7 +104,7 @@ function displayItemCount() {
   console.log("uncompletedItems", uncompletedItems);
 }
 
-function displayList(todoItem) {
+function displayList() {
   listItems.innerHTML = "";
   toDoList.forEach(function (item) {
     let listRadioBtn = document.createElement("input");
@@ -121,18 +135,7 @@ function displayList(todoItem) {
     listItems.appendChild(allListElements); //listItems-list form olandi
 
     // checked olunan item count hesablma hissesi
-    allListElements.setAttribute("data-key", todoItem.id);
-
-    listRadioBtn.addEventListener("click", (event) => {
-      const key = event.target.parentElement.parentElement.dataset.key;
-      const item = toDoList.find((item) => item.id === Number(key));
-
-      item.isCompleted = !item.isCompleted;
-    });
-
-    listRadioBtn.addEventListener("change", () => {
-      displayItemCount();
-    });
+    allListElements.setAttribute("data-key", item.id);
   });
 }
 let iconBtn = document.getElementById("iconBtn");
