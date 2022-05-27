@@ -1,143 +1,10 @@
-// let form = document.getElementById("form");
-// let listRadio = document.getElementById("list-radio");
-// let listInput = document.getElementById("list-input").value;
-// let input = document.getElementById("list-input");
-
-// let radioForm = document.querySelector('input[type="radio"]');
-
-// form.addEventListener("submit", (event) => {
-//   event.preventDefault();
-//   listRadio.checked = false;
-
-//   let allListItems = document.getElementById("all-list-items");
-//   let listItems = document.createElement("div");
-//   listItems.classList.add("list-items");
-
-//   let listItem = document.createElement("div");
-//   let listLabel = document.createTextNode(listInput);
-//   let spanLabel = document.createElement("span");
-//   spanLabel.classList.add("span-label");
-//   listItem.classList.add("list-label");
-//   let listRadioBtn = document.createElement("input");
-//   listRadioBtn.classList.add("list-radio-btn");
-//   listRadioBtn.setAttribute("type", "radio");
-//   listItems.appendChild(listRadioBtn);
-//   spanLabel.appendChild(listLabel);
-//   listItem.appendChild(spanLabel);
-//   listItems.appendChild(listItem);
-//   allListItems.appendChild(listItems);
-// });
-
-// listRadio.addEventListener("click", () => {
-//   if (listRadio.checked == true) {
-//     listRadio.checked = false;
-//     input.style.textDecoration = "line-through";
-//     radioForm.style.accentColor = "#8b0ffe";
-//     radioForm.style.height = "1.7em";
-//     radioForm.style.width = "1.7em";
-//     console.log(listRadio.checked);
-//   } else {
-//     listRadio.checked = true;
-//     input.style.textDecoration = "none";
-//     radioForm.style.accentColor = "#fff";
-//     radioForm.style.height = "1.7em";
-//     radioForm.style.width = "1.7em";
-//     console.log(listRadio.checked);
-//   }
-// });
-// // const yesBtn = document.getElementById('yes');
-// // yesBtn.checked = true;
-
-// // const noBtn = document.getElementById('no');
-// // noBtn.checked = true;
-
 let form = document.getElementById("form");
 let input = document.getElementById("list-input");
 let listItems = document.getElementById("list-form");
 let inputCheckbox = document.getElementById("checkbox");
 let countUncompleted = document.getElementById("count-uncompleted-items");
 
-const toDoList = [];
-
-listItems.addEventListener("click", (event) => {
-  if (event.target.matches('input[type="checkbox"]')) {
-    const key = event.target.parentElement.parentElement.dataset.key;
-    toDoList.forEach((todoItem) => {
-      if (todoItem.id == key) {
-        console.log(todoItem, key);
-        console.log(document.querySelector(`[data-key="${key}"]`));
-        todoItem.isCompleted = event.target.checked;
-      }
-    });
-    displayItemCount();
-  }
-});
-
-form.addEventListener("submit", handleFormSubmit);
-// listItems.addEventListener("click", handleListClick);
-
-function handleFormSubmit(event) {
-  event.preventDefault();
-  const todoItem = {
-    text: input.value,
-    isCompleted: inputCheckbox.checked,
-    id: Date.now(),
-  };
-
-  if (input.value !== "") {
-    toDoList.push(todoItem);
-    input.value = "";
-    inputCheckbox.checked = false;
-    displayList();
-    displayItemCount();
-  }
-
-  // console.log("To do list---", toDoList);
-}
-
-function displayItemCount() {
-  const uncompletedItems = toDoList.filter(
-    (item) => item.isCompleted === false
-  );
-  countUncompleted.textContent = uncompletedItems.length + " items lefts";
-
-  console.log("uncompletedItems", uncompletedItems);
-}
-
-function displayList() {
-  listItems.innerHTML = "";
-  toDoList.forEach(function (item) {
-    let listRadioBtn = document.createElement("input");
-    listRadioBtn.classList.add("list-radio-btn");
-    listRadioBtn.setAttribute("type", "checkbox");
-    // console.log(item);
-    listRadioBtn.checked = item.isCompleted;
-    let listContainer = document.createElement("div");
-    listContainer.classList.add("list-items");
-    listContainer.appendChild(listRadioBtn);
-
-    const listItem = document.createElement("li");
-    listItem.textContent = item.text;
-    listItem.classList.add("list-item");
-    listItem.style.listStyle = "none";
-    if (item.isCompleted) {
-      listItem.classList.add("is-completed");
-    }
-    let deleteBtn = document.createElement("button");
-    deleteBtn.classList.add("delete-btn");
-    deleteBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-
-    let allListElements = document.createElement("div");
-    allListElements.classList.add("all-list-elements");
-    listContainer.appendChild(listItem);
-    allListElements.append(listContainer);
-    allListElements.appendChild(deleteBtn);
-    listItems.appendChild(allListElements); //listItems-list form olandi
-
-    // checked olunan item count hesablma hissesi
-    allListElements.setAttribute("data-key", item.id);
-  });
-}
+// dark/light moodun tetbiq olunmasi
 let iconBtn = document.getElementById("iconBtn");
 let img = document.getElementById("img");
 let iconMoon = document.getElementById("iconMoon");
@@ -164,4 +31,150 @@ iconBtn.onclick = function () {
     document.getElementById("iconMoon").classList.remove("fa-sun");
     document.getElementById("iconMoon").classList.add("fa-moon");
   }
+};
+
+let toDoList = [];
+
+listItems.addEventListener("click", displayCount);
+
+//Idlere gore itemsin checked/uncheked olunmasi
+function displayCount(event) {
+  if (event.target.matches('input[type="checkbox"]')) {
+    const key = event.target.parentElement.parentElement.dataset.key;
+    toDoList.forEach((todoItem) => {
+      if (todoItem.id == key) {
+        todoItem.isCompleted = event.target.checked;
+      }
+    });
+    displayItemCount();
+  }
+}
+
+form.addEventListener("submit", handleFormSubmit);
+
+function handleFormSubmit(event) {
+  event.preventDefault();
+  const todoItem = {
+    text: input.value,
+    isCompleted: inputCheckbox.checked,
+    id: Date.now(),
+  };
+
+  if (input.value !== "") {
+    toDoList.push(todoItem);
+    input.value = "";
+    inputCheckbox.checked = false;
+    displayList();
+    displayItemCount();
+  }
+}
+// unchecked olunan itemlarin sayinin hesablanmasi
+function displayItemCount() {
+  const uncompletedItems = toDoList.filter(
+    (item) => item.isCompleted === false
+  );
+  countUncompleted.textContent = uncompletedItems.length + " items lefts";
+}
+
+// esas listi gosteren hisse
+function showList(list) {
+  listItems.innerHTML = "";
+  list.forEach(function (item) {
+    let listRadioBtn = document.createElement("input");
+    listRadioBtn.classList.add("list-radio-btn");
+    listRadioBtn.setAttribute("type", "checkbox");
+    // console.log(item);
+    listRadioBtn.checked = item.isCompleted;
+    let listContainer = document.createElement("div");
+    listContainer.classList.add("list-items");
+    listContainer.appendChild(listRadioBtn);
+
+    const listItem = document.createElement("li");
+    listItem.textContent = item.text;
+    listItem.classList.add("list-item");
+    listItem.style.listStyle = "none";
+    if (item.isCompleted) {
+      listItem.classList.add("is-completed");
+    }
+    let deleteBtn = window.document.createElement("button");
+    deleteBtn.classList.add("delete_btn");
+
+    deleteBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+
+    let allListElements = document.createElement("div");
+    allListElements.classList.add("all-list-elements");
+    listContainer.appendChild(listItem);
+    allListElements.append(listContainer);
+    allListElements.appendChild(deleteBtn);
+
+    listItems.appendChild(allListElements); //listItems-list form olandi
+
+    // checked olunan item count hesablma hissesi
+    allListElements.setAttribute("data-key", item.id);
+  });
+}
+
+//all hissesinin displayi
+function displayList() {
+  showList(toDoList);
+}
+
+//active hissesinin displayi
+function showActives() {
+  let activeItems = toDoList.filter((item) => item.isCompleted === false);
+  showList(activeItems);
+}
+//completed hissesinin displayi
+function showCompleted() {
+  let completedItems = toDoList.filter((item) => item.isCompleted === true);
+  showList(completedItems);
+}
+
+listItems.addEventListener("click", deleteListItem);
+
+//listden itemin remove olunmasi
+function deleteListItem(event) {
+  if (event.target.matches("button.delete_btn")) {
+    // event.target.parentElement.remove();
+    const key = event.target.parentElement.dataset.key;
+
+    let index = toDoList.findIndex((item) => Number(item.id) === Number(key));
+    toDoList.splice(index, 1);
+    displayList();
+    displayItemCount();
+  }
+}
+
+//filtred category hissesi
+let listFilter = document.getElementById("filter");
+let all = document.getElementById("all");
+let active = document.getElementById("active");
+let completed = document.getElementById("completed");
+let clearCompleted = document.getElementById("clear_completed");
+all.onclick = function () {
+  all.style.color = "blue";
+  active.style.color = "#000";
+  completed.style.color = "#000";
+  displayList();
+};
+
+active.onclick = function () {
+  all.style.color = "#000";
+  active.style.color = "blue";
+  completed.style.color = "#000";
+  showActives();
+};
+
+completed.onclick = function () {
+  all.style.color = "#000";
+  active.style.color = "#000";
+  completed.style.color = "blue";
+  showCompleted();
+};
+
+clearCompleted.onclick = function () {
+  console.log("nese");
+  toDoList = toDoList.filter((item) => item.isCompleted === false);
+  displayList();
+  displayItemCount();
 };

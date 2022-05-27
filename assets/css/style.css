@@ -183,7 +183,7 @@ input[type="checkbox"]:checked {
   list-style: none;
   width: 200px;
 }
-.list-filter li a {
+.list-filter a {
   text-decoration: none;
 }
 .clear-completed a {
@@ -230,9 +230,29 @@ body {
 ::placeholder,
 .list-content,
 .delete-btn,
-.list-filter li a,
-.clear-completed p a,
+.clear-completed a,
 .list-items {
   background-color: var(--form-bcg-color) !important;
   color: var(--text-color) !important;
+}
+
+ul li a {
+  font-family: "Josefin Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 18px;
+  letter-spacing: -0.25px;
+}
+#all {
+  color: blue;
+}
+.clear-completed a {
+  font-family: "Josefin Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 18px;
+  letter-spacing: -0.25px;
+  color: #505050;
 }

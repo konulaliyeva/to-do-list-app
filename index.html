@@ -42,24 +42,18 @@
         </form>
 
         <div class="list-content">
-          <div class="label-container" id="list-form">
-            <!-- <div>
-              <label for="added-item"></label>
-              <input type="radio" id="added-item" class="added-items" />
-            </div>
-            <i class="fa-solid fa-xmark"></i> -->
-          </div>
+          <div class="label-container" id="list-form"></div>
           <div class="footer-list">
             <div class="left-items"><p id="count-uncompleted-items"></p></div>
             <div class="center-items">
-              <ul class="list-filter">
-                <li><a href="#">All</a></li>
-                <li><a href="#">Active</a></li>
-                <li><a href="#">Completed</a></li>
+              <ul class="list-filter" id="filter">
+                <li class="all"><a id="all" href="#">All</a></li>
+                <li><a id="active" href="#">Active</a></li>
+                <li><a id="completed" href="#">Completed</a></li>
               </ul>
             </div>
             <div class="clear-completed">
-              <p><a href="#">Clear completed</a></p>
+              <a id="clear_completed" href="#">Clear completed</a>
             </div>
           </div>
         </div>
@@ -67,5 +61,6 @@
     </section>
 
     <script src="script.js"></script>
+    <!-- <script src="myScript.js"></script> -->
   </body>
 </html>
