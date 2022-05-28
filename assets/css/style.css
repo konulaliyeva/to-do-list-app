@@ -239,13 +239,14 @@ body {
 ul li a {
   font-family: "Josefin Sans", sans-serif;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 200;
   font-size: 20px;
   line-height: 18px;
   letter-spacing: -0.25px;
+  color: #505050;
 }
 #all {
-  color: blue;
+  color: #bf88f4;
 }
 .clear-completed a {
   font-family: "Josefin Sans", sans-serif;
@@ -255,4 +256,8 @@ ul li a {
   line-height: 18px;
   letter-spacing: -0.25px;
   color: #505050;
+}
+
+.fa-solid.fa-xmark {
+  pointer-events: none;
 }

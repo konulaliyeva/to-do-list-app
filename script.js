@@ -50,6 +50,9 @@ function displayCount(event) {
   }
 }
 
+let selectedFilter = "";
+// onClick #active => selectedFilter = 'active'
+
 form.addEventListener("submit", handleFormSubmit);
 
 function handleFormSubmit(event) {
@@ -64,9 +67,16 @@ function handleFormSubmit(event) {
     toDoList.push(todoItem);
     input.value = "";
     inputCheckbox.checked = false;
-    displayList();
-    displayItemCount();
+
+    if (selectedFilter === "ACTIVE") {
+      showActives();
+    } else if (selectedFilter === "COMPLETED") {
+      showCompleted();
+    } else {
+      displayList();
+    }
   }
+  displayItemCount();
 }
 // unchecked olunan itemlarin sayinin hesablanmasi
 function displayItemCount() {
@@ -80,26 +90,15 @@ function displayItemCount() {
 function showList(list) {
   listItems.innerHTML = "";
   list.forEach(function (item) {
-    let listRadioBtn = document.createElement("input");
-    listRadioBtn.classList.add("list-radio-btn");
-    listRadioBtn.setAttribute("type", "checkbox");
-    // console.log(item);
-    listRadioBtn.checked = item.isCompleted;
+    let listRadioBtn = createCheckbox(item);
+
+    const listItem = createListItem(item);
+
+    const deleteBtn = createDeleteBtn();
+
     let listContainer = document.createElement("div");
     listContainer.classList.add("list-items");
     listContainer.appendChild(listRadioBtn);
-
-    const listItem = document.createElement("li");
-    listItem.textContent = item.text;
-    listItem.classList.add("list-item");
-    listItem.style.listStyle = "none";
-    if (item.isCompleted) {
-      listItem.classList.add("is-completed");
-    }
-    let deleteBtn = window.document.createElement("button");
-    deleteBtn.classList.add("delete_btn");
-
-    deleteBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
 
     let allListElements = document.createElement("div");
     allListElements.classList.add("all-list-elements");
@@ -108,10 +107,35 @@ function showList(list) {
     allListElements.appendChild(deleteBtn);
 
     listItems.appendChild(allListElements); //listItems-list form olandi
-
     // checked olunan item count hesablma hissesi
     allListElements.setAttribute("data-key", item.id);
   });
+}
+function createCheckbox(item) {
+  let listRadioBtn = document.createElement("input");
+  listRadioBtn.classList.add("list-radio-btn");
+  listRadioBtn.setAttribute("type", "checkbox");
+  listRadioBtn.checked = item.isCompleted;
+  return listRadioBtn;
+}
+function createListItem(item) {
+  const listItem = document.createElement("li");
+  listItem.textContent = item.text;
+  listItem.classList.add("list-item");
+  listItem.style.listStyle = "none";
+  if (item.isCompleted) {
+    listItem.classList.add("is-completed");
+  }
+  return listItem;
+}
+
+function createDeleteBtn() {
+  let deleteBtn = window.document.createElement("button");
+  deleteBtn.classList.add("delete_btn");
+
+  deleteBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+
+  return deleteBtn;
 }
 
 //all hissesinin displayi
@@ -155,6 +179,7 @@ all.onclick = function () {
   all.style.color = "blue";
   active.style.color = "#000";
   completed.style.color = "#000";
+  selectedFilter = "";
   displayList();
 };
 
@@ -162,6 +187,7 @@ active.onclick = function () {
   all.style.color = "#000";
   active.style.color = "blue";
   completed.style.color = "#000";
+  selectedFilter = "ACTIVE";
   showActives();
 };
 
@@ -169,6 +195,7 @@ completed.onclick = function () {
   all.style.color = "#000";
   active.style.color = "#000";
   completed.style.color = "blue";
+  selectedFilter = "COMPLETED";
   showCompleted();
 };
 
