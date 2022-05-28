@@ -37,19 +37,6 @@ let toDoList = [];
 
 listItems.addEventListener("click", displayCount);
 
-//Idlere gore itemsin checked/uncheked olunmasi
-function displayCount(event) {
-  if (event.target.matches('input[type="checkbox"]')) {
-    const key = event.target.parentElement.parentElement.dataset.key;
-    toDoList.forEach((todoItem) => {
-      if (todoItem.id == key) {
-        todoItem.isCompleted = event.target.checked;
-      }
-    });
-    displayItemCount();
-  }
-}
-
 let selectedFilter = "";
 // onClick #active => selectedFilter = 'active'
 
@@ -78,6 +65,31 @@ function handleFormSubmit(event) {
   }
   displayItemCount();
 }
+
+//Idlere gore itemsin checked/uncheked olunmasi
+function displayCount(event) {
+  if (event.target.matches('input[type="checkbox"]')) {
+    const key = event.target.parentElement.parentElement.dataset.key;
+    toDoList.forEach((todoItem) => {
+      if (todoItem.id == key) {
+        todoItem.isCompleted = event.target.checked;
+      }
+    });
+    toDoList.forEach((todoItem) => {
+      if (selectedFilter === "") {
+        showList(list);
+      }
+      if (todoItem.isCompleted && selectedFilter === "ACTIVE") {
+        showActives();
+      }
+      if (todoItem.isCompleted === false && selectedFilter === "COMPLETED") {
+        showCompleted();
+      }
+    });
+    displayItemCount();
+  }
+}
+
 // unchecked olunan itemlarin sayinin hesablanmasi
 function displayItemCount() {
   const uncompletedItems = toDoList.filter(
@@ -200,7 +212,6 @@ completed.onclick = function () {
 };
 
 clearCompleted.onclick = function () {
-  console.log("nese");
   toDoList = toDoList.filter((item) => item.isCompleted === false);
   displayList();
   displayItemCount();

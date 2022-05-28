@@ -98,13 +98,6 @@
   letter-spacing: -0.25px;
 }
 
-/* .form-radio-button:checked ~ ::placeholder {
-  text-decoration: none !important;
-}
-.form-radio-button:checked ~ .form-input {
-  text-decoration: line-through;
-} */
-
 .input-item-class {
   width: 100% !important;
 }
@@ -129,7 +122,6 @@
 .label-container {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
 }
 .list-items {
   display: flex;
@@ -153,10 +145,6 @@
 }
 
 input[type="checkbox"] {
-  /* height: 1.4em;
-  width: 1.4em;
-  accent-color: #8b0ffe;
-  clip-path: circle(46% at 50% 50%); */
   width: 1.6em;
   height: 1.6em;
   background-color: white;
