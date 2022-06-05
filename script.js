@@ -75,17 +75,18 @@ function displayCount(event) {
         todoItem.isCompleted = event.target.checked;
       }
     });
-    toDoList.forEach((todoItem) => {
+    event.target.parentElement.parentElement.classList.add("is-completed");
+    setTimeout(() => {
       if (selectedFilter === "") {
         showList(list);
       }
-      if (todoItem.isCompleted && selectedFilter === "ACTIVE") {
+      if (selectedFilter === "ACTIVE") {
         showActives();
       }
-      if (todoItem.isCompleted === false && selectedFilter === "COMPLETED") {
+      if (selectedFilter === "COMPLETED") {
         showCompleted();
       }
-    });
+    }, 300);
     displayItemCount();
   }
 }
