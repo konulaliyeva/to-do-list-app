@@ -22,11 +22,11 @@
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  margin: 0 auto;
-  padding: 20px;
-  position: absolute;
-  top: 50px;
-  left: 500px;
+  align-items: center;
+  padding: 20px; 
+
+  transform: translateY(-60%);
+  
 }
 
 .list-heading {
@@ -34,6 +34,7 @@
   align-content: center;
   justify-content: space-between;
   align-items: center;
+  width: 500px;
 }
 
 .list-heading h1 {
@@ -249,3 +250,4 @@ ul li a {
 .fa-solid.fa-xmark {
   pointer-events: none;
 }
+
